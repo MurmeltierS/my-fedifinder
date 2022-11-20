@@ -21,7 +21,7 @@ const app = express();
 const authClient = new auth.OAuth2User({
     client_id: process.env.CLIENT_ID as string,
     client_secret: process.env.CLIENT_SECRET as string,
-    callback: 'https://9c9a-109-90-208-29.eu.ngrok.io/callback',
+    callback: `${process.env.HOST}/callback`,
     scopes: ['tweet.read', 'users.read', 'offline.access', 'follows.read'],
 });
 
@@ -195,9 +195,10 @@ app.get('/webfinger', async function(req, res) {
     } catch (error) {
         console.log('err');
         console.log(error);
+        res.send({ err: 'Error' })
     }
 })
 
 app.listen(3000, () => {
-    console.log(`Go here to login: http://127.0.0.1:3000/login`);
+    console.log(`Go here to login: ${process.env.HOST}/login`);
 });

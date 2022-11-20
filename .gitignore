@@ -1,2 +1,4 @@
 # base node gitignore
 node_modules
+
+.env
